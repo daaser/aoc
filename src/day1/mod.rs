@@ -1,14 +1,11 @@
 const INPUT: &'static str = include_str!("input.txt");
 
 pub fn most_calories() -> usize {
-  let input = partition();
-  input.into_iter().last().unwrap_or_default()
+  partition().into_iter().next().unwrap_or_default()
 }
 
 pub fn top_three_most_calories() -> usize {
-  let input = partition();
-  let i_len = input.len();
-  input.into_iter().skip(i_len - 3).sum()
+  partition().into_iter().take(3).sum()
 }
 
 fn partition() -> Vec<usize> {
@@ -22,6 +19,6 @@ fn partition() -> Vec<usize> {
     }
     count += line.parse::<usize>().unwrap();
   }
-  collector.sort();
+  collector.sort_by(|a, b| b.cmp(a));
   collector
 }
