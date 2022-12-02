@@ -69,7 +69,7 @@ impl Choice {
     (inputs[0], inputs[1])
   }
 
-  fn cmp1(&self, other: Self) -> usize {
+  fn cmp(&self, other: Self) -> usize {
     match (self, other) {
       (Rock, Rock) => 1 + 3,
       (Rock, Paper) => 2 + 6,
@@ -84,7 +84,7 @@ impl Choice {
   }
 
   // this code is bad and I feel bad
-  fn cmp2(&self, other: Outcome) -> usize {
+  fn cmp_outcome(&self, other: Outcome) -> usize {
     match (self, other) {
       (Rock, Lose) => 3,
       (Rock, Draw) => 1 + 3,
@@ -103,7 +103,7 @@ pub fn perfect_strategy() -> usize {
   let mut total = 0usize;
   for line in INPUT.lines() {
     let (theirs, mine) = Choice::new(line);
-    total += theirs.cmp1(mine);
+    total += theirs.cmp(mine);
   }
   total
 }
@@ -112,7 +112,7 @@ pub fn perfecter_strategy() -> usize {
   let mut total = 0usize;
   for line in INPUT.lines() {
     let (theirs, mine) = Outcome::new(line);
-    total += theirs.cmp2(mine);
+    total += theirs.cmp_outcome(mine);
   }
   total
 }
