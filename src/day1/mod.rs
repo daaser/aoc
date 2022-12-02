@@ -22,3 +22,10 @@ fn partition() -> Vec<usize> {
   collector.sort_by(|a, b| b.cmp(a));
   collector
 }
+
+/*
+=== DAY 1 ===
+73211
+213958
+=============
+ */
