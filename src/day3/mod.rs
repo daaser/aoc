@@ -18,8 +18,8 @@ pub fn part1() -> usize {
     let line_len = line.len();
     let (first, second) = line.split_at(line_len / 2);
 
-    let f: HashSet<char> = HashSet::from_iter(first.chars());
-    let s: HashSet<char> = HashSet::from_iter(second.chars());
+    let f: HashSet<char> = first.chars().collect();
+    let s: HashSet<char> = second.chars().collect();
 
     for int in &f & &s {
       total += calculate_value(int);
@@ -31,16 +31,16 @@ pub fn part1() -> usize {
 pub fn part2() -> usize {
   let mut total = 0usize;
   let lines = INPUT.lines().collect::<Vec<_>>();
-  for chunk in lines.chunks(3) {
-    let f: HashSet<char> = HashSet::from_iter(chunk[0].chars());
-    let s: HashSet<char> = HashSet::from_iter(chunk[1].chars());
-    let t: HashSet<char> = HashSet::from_iter(chunk[2].chars());
+  let mut chunks = lines.chunks(3);
+  while let Some([first, second, third]) = chunks.next() {
+    let f: HashSet<char> = first.chars().collect();
+    let s: HashSet<char> = second.chars().collect();
+    let t: HashSet<char> = third.chars().collect();
 
     for int in &(&f & &s) & &t {
       total += calculate_value(int)
     }
   }
-
   total
 }
 
