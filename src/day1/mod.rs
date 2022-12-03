@@ -1,10 +1,10 @@
 const INPUT: &'static str = include_str!("input.txt");
 
-pub fn most_calories() -> usize {
+pub fn part1() -> usize {
   partition().into_iter().next().unwrap_or_default()
 }
 
-pub fn top_three_most_calories() -> usize {
+pub fn part2() -> usize {
   partition().into_iter().take(3).sum()
 }
 

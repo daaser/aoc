@@ -99,7 +99,7 @@ impl Choice {
   }
 }
 
-pub fn perfect_strategy() -> usize {
+pub fn part1() -> usize {
   let mut total = 0usize;
   for line in INPUT.lines() {
     let (theirs, mine) = Choice::new(line);
@@ -108,7 +108,7 @@ pub fn perfect_strategy() -> usize {
   total
 }
 
-pub fn perfecter_strategy() -> usize {
+pub fn part2() -> usize {
   let mut total = 0usize;
   for line in INPUT.lines() {
     let (theirs, mine) = Outcome::new(line);

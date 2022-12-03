@@ -1,18 +1,23 @@
 mod day1;
 mod day2;
+mod day3;
 
-fn main() -> eyre::Result<()> {
+fn main() {
   println!(
-    "=== DAY 1 ===\n{}\n{}\n=============",
-    day1::most_calories(),
-    day1::top_three_most_calories(),
+    "=== DAY 1 ====\n{}\n{}\n==============\n",
+    day1::part1(),
+    day1::part2(),
   );
 
   println!(
-    "=== DAY 2 ===\n{}\n{}\n=============",
-    day2::perfect_strategy(),
-    day2::perfecter_strategy(),
+    "=== DAY 2 ====\n{}\n{}\n==============\n",
+    day2::part1(),
+    day2::part2(),
   );
 
-  Ok(())
+  println!(
+    "=== DAY 3 ====\n{}\n{}\n==============\n",
+    day3::part1(),
+    day3::part2(),
+  );
 }
