@@ -1,6 +1,7 @@
 mod day1;
 mod day2;
 mod day3;
+mod day4;
 
 use paste::paste;
 
@@ -19,4 +20,5 @@ fn main() {
   day!(1);
   day!(2);
   day!(3);
+  day!(4);
 }

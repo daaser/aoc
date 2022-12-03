@@ -5,3 +5,11 @@ edition = "2021"
 
 [dependencies]
 paste = "1.0.9"
+
+[profile.release]
+panic = "abort"
+opt-level = 3
+rpath = false
+strip = true
+lto = true
+codegen-units = 1
