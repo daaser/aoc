@@ -5,6 +5,7 @@ edition = "2021"
 
 [dependencies]
 paste = "1.0.9"
+text_io = "0.1.12"
 
 [profile.release]
 panic = "abort"
