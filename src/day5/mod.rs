@@ -26,10 +26,8 @@ fn parse_input() -> (Vec<VecDeque<char>>, Vec<Instruction>) {
 
   let num_stacks = stacks.split_whitespace().last().unwrap().parse::<usize>().unwrap();
 
-  let instructions: Vec<Instruction> = instructions
-    .lines()
-    .map(|line| Instruction::from_str(line).unwrap())
-    .collect();
+  let instructions: Vec<Instruction> =
+    instructions.lines().map(|line| Instruction::from_str(line).unwrap()).collect();
 
   let mut stacks = vec![VecDeque::new(); num_stacks];
   for line in stack_data.lines() {
