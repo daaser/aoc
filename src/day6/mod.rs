@@ -1,12 +1,13 @@
-use std::collections::HashSet;
-
 const INPUT: &'static [u8] = include_bytes!("input.txt");
+
+fn has_duplicate(arr: &[u8]) -> bool {
+  arr.iter().enumerate().any(|(i, b)| arr[..i].contains(b))
+}
 
 fn unique_window(size: usize) -> usize {
   let mut count = size;
   'window: for pane in INPUT.windows(size) {
-    let set = pane.iter().collect::<HashSet<&u8>>();
-    if set.len() == size {
+    if !has_duplicate(pane) {
       break 'window;
     }
     count += 1;
