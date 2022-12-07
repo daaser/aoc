@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 
-const INPUT: &'static str = include_str!("input.txt");
+const INPUT: &str = include_str!("input.txt");
 
 fn calculate_value(b: char) -> usize {
   let b = b as u8;

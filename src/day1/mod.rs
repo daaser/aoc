@@ -1,4 +1,4 @@
-const INPUT: &'static str = include_str!("input.txt");
+const INPUT: &str = include_str!("input.txt");
 
 pub fn part1() -> usize { partition().into_iter().next().unwrap_or_default() }
 

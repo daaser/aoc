@@ -4,7 +4,7 @@ use std::str::FromStr;
 use crate::day2::Choice::{Paper, Rock, Scissor};
 use crate::day2::Outcome::{Draw, Lose, Win};
 
-const INPUT: &'static str = include_str!("input.txt");
+const INPUT: &str = include_str!("input.txt");
 
 #[derive(Debug, Clone, Copy, PartialEq)]
 enum Choice {

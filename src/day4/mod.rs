@@ -1,6 +1,6 @@
 use std::collections::HashSet;
 
-const INPUT: &'static str = include_str!("input.txt");
+const INPUT: &str = include_str!("input.txt");
 
 fn parse_line_to_set(line: &str) -> (HashSet<usize>, HashSet<usize>) {
   // let (r1_start, r1_end, r2_start, r2_end): (usize, usize, usize, usize);

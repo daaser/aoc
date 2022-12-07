@@ -1,4 +1,4 @@
-const INPUT: &'static [u8] = include_bytes!("input.txt");
+const INPUT: &[u8] = include_bytes!("input.txt");
 
 #[inline]
 fn has_duplicate(arr: &[u8]) -> bool { arr.iter().enumerate().any(|(i, b)| arr[..i].contains(b)) }

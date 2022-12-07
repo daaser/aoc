@@ -1,7 +1,7 @@
 use std::collections::VecDeque;
 use std::str::FromStr;
 
-const INPUT: &'static str = include_str!("input.txt");
+const INPUT: &str = include_str!("input.txt");
 
 #[derive(Debug)]
 struct Instruction {
@@ -22,7 +22,7 @@ impl FromStr for Instruction {
 
 fn parse_input() -> (Vec<VecDeque<char>>, Vec<Instruction>) {
   let (begin_state, instructions) = INPUT.split_once("\n\n").unwrap();
-  let (stack_data, stacks) = begin_state.rsplit_once("\n").unwrap();
+  let (stack_data, stacks) = begin_state.rsplit_once('\n').unwrap();
 
   let num_stacks = stacks.split_whitespace().last().unwrap().parse::<usize>().unwrap();
 
