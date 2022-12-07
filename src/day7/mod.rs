@@ -1,8 +1,10 @@
-const INPUT: &str = include_str!("input.txt");
-
 use std::collections::BTreeMap;
 
 use indextree::{Arena, NodeId};
+
+const INPUT: &str = include_str!("input.txt");
+const DISK_SIZE: usize = 70_000_000;
+const SIZE_NEEDED: usize = 30_000_000;
 
 #[derive(Debug, Clone)]
 struct FSNode {
@@ -85,12 +87,11 @@ pub fn part2() -> usize {
   let arena = &mut Arena::new();
   let root = parse_filesystem(arena);
 
-  let mut smallest = 70_000_000;
-  let target = 30_000_000;
-  let unused = 70_000_000 - arena[root].get().size;
+  let mut smallest = DISK_SIZE;
+  let unused = DISK_SIZE - arena[root].get().size;
   for node in arena.iter() {
     let size = node.get().size;
-    if size + unused >= target {
+    if size + unused >= SIZE_NEEDED {
       smallest = smallest.min(size);
     }
   }
