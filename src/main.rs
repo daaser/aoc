@@ -5,6 +5,7 @@ mod day4;
 mod day5;
 mod day6;
 mod day7;
+mod day8;
 
 use std::time::Instant;
 
@@ -14,12 +15,13 @@ macro_rules! day {
   ($day:tt) => {
     let now = Instant::now();
     println!(
-      "=== DAY {:<2} ====\n{}\n{}\n",
+      "┏━━━ DAY {:<2} ━━━┓\n┃{:<14}┃\n┃{:<14}┃\n┃{:14}┃",
       $day,
       paste! { [<day $day>]::part1() },
       paste! { [<day $day>]::part2() },
+      ""
     );
-    println!("{:?}\n===============\n", now.elapsed());
+    println!("┃{:<14?}┃\n┗━━━━━━━━━━━━━━┛\n", now.elapsed());
   };
 }
 
@@ -31,4 +33,5 @@ fn main() {
   day!(5);
   day!(6);
   day!(7);
+  day!(8);
 }
