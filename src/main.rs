@@ -4,6 +4,7 @@ mod day3;
 mod day4;
 mod day5;
 mod day6;
+mod day7;
 
 use std::time::Instant;
 
@@ -29,4 +30,5 @@ fn main() {
   day!(4);
   day!(5);
   day!(6);
+  day!(7);
 }

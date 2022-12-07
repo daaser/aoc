@@ -3,7 +3,10 @@ use std::collections::HashSet;
 const INPUT: &'static str = include_str!("input.txt");
 
 fn parse_line_to_set(line: &str) -> (HashSet<usize>, HashSet<usize>) {
-  let range: Vec<usize> = line.split(&[',', '-']).map(|n| n.parse::<usize>().unwrap()).collect();
+  // let (r1_start, r1_end, r2_start, r2_end): (usize, usize, usize, usize);
+  // text_io::scan!(line.bytes() => "{}-{},{}-{}", r1_start, r1_end, r2_start, r2_end);
+
+  let range: Vec<usize> = line.split(&[',', '-']).filter_map(|n| n.parse().ok()).collect();
   let [r1_start, r1_end, r2_start, r2_end] = range[..] else { unreachable!() };
   ((r1_start..=r1_end).collect(), (r2_start..=r2_end).collect())
 }
