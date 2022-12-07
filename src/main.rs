@@ -15,13 +15,13 @@ macro_rules! day {
   ($day:tt) => {
     let now = Instant::now();
     println!(
-      "┏━━━ DAY {:<2} ━━━┓\n┃{:<14}┃\n┃{:<14}┃\n┃{:14}┃",
+      "┏━━━━ DAY {:<2} ━━━━┓\n┃{:<16}┃\n┃{:<16}┃\n┃{:16}┃",
       $day,
       paste! { [<day $day>]::part1() },
       paste! { [<day $day>]::part2() },
       ""
     );
-    println!("┃{:<14?}┃\n┗━━━━━━━━━━━━━━┛\n", now.elapsed());
+    println!("┃{:<16?}┃\n┗━━━━━━━━━━━━━━━━┛\n", now.elapsed());
   };
 }
 
