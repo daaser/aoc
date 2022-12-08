@@ -64,8 +64,8 @@ pub fn part2() -> String {
 }
 
 /*
-=== DAY 5  ====
-JCMHLVGMG
-LVMRWSSPZ
-===============
+┏━━━━ DAY 5  ━━━━┓
+┃JCMHLVGMG       ┃
+┃LVMRWSSPZ       ┃
+┗━━━━━━━━━━━━━━━━┛
  */

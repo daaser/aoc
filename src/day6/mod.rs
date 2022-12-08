@@ -19,8 +19,8 @@ pub fn part1() -> usize { unique_window(4) }
 pub fn part2() -> usize { unique_window(14) }
 
 /*
-=== DAY 6  ====
-1531
-2518
-===============
+┏━━━━ DAY 6  ━━━━┓
+┃1531            ┃
+┃2518            ┃
+┗━━━━━━━━━━━━━━━━┛
  */
