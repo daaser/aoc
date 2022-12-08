@@ -1,4 +1,4 @@
-use std::char::ParseCharError;
+use std::fs::File;
 use std::str::FromStr;
 
 const INPUT: &str = include_str!("input.txt");
@@ -11,7 +11,7 @@ struct Grid {
 }
 
 impl FromStr for Grid {
-  type Err = ParseCharError;
+  type Err = ();
 
   fn from_str(s: &str) -> Result<Self, Self::Err> {
     let mut arr: Vec<Vec<usize>> = vec![];
@@ -32,7 +32,7 @@ impl Grid {
     }
     let target = self.array[y][x];
     let (mut left, mut right, mut top, mut bottom) = (true, true, true, true);
-    for i in 0..x {
+    for i in (0..x).rev() {
       if self.array[y][i] >= target {
         left = false
       }
@@ -42,7 +42,7 @@ impl Grid {
         right = false
       }
     }
-    for i in 0..y {
+    for i in (0..y).rev() {
       if self.array[i][x] >= target {
         top = false
       }
@@ -89,11 +89,7 @@ impl Grid {
   }
 
   fn is_edge(&self, x: usize, y: usize) -> bool {
-    if x == self.width - 1 || x == 0 || y == self.height - 1 || y == 0 {
-      true
-    } else {
-      false
-    }
+    x == self.width - 1 || x == 0 || y == self.height - 1 || y == 0
   }
 }
 
