@@ -21,7 +21,11 @@ macro_rules! day {
       paste! { [<day $day>]::part_two() },
       ""
     );
-    println!("┃{:<16?}┃\n┗━━━━━━━━━━━━━━━━┛\n", now.elapsed());
+    if $day == 25 {
+      println!("┃{:<16?}┃\n┗━━━━━━━━━━━━━━━━┛", now.elapsed());
+    } else {
+      println!("┃{:<16?}┃\n┗━━━━━━━━━━━━━━━━┛\n", now.elapsed());
+    }
   };
 }
 
