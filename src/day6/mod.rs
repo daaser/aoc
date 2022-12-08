@@ -1,7 +1,9 @@
 const INPUT: &[u8] = include_bytes!("input.txt");
 
 #[inline]
-fn has_duplicate(arr: &[u8]) -> bool { arr.iter().enumerate().any(|(i, b)| arr[..i].contains(b)) }
+fn has_duplicate(arr: &[u8]) -> bool {
+  arr.iter().enumerate().any(|(i, b)| arr[..i].contains(b))
+}
 
 fn unique_window(size: usize) -> usize {
   let mut count = size;
@@ -14,9 +16,13 @@ fn unique_window(size: usize) -> usize {
   count
 }
 
-pub fn part_one() -> usize { unique_window(4) }
+pub fn part_one() -> usize {
+  unique_window(4)
+}
 
-pub fn part_two() -> usize { unique_window(14) }
+pub fn part_two() -> usize {
+  unique_window(14)
+}
 
 /*
 ┏━━━━ DAY 6  ━━━━┓

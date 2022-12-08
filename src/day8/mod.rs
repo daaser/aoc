@@ -24,66 +24,33 @@ impl FromStr for Grid {
   }
 }
 
+#[rustfmt::skip]
 impl Grid {
   fn is_visible(&self, x: usize, y: usize) -> bool {
-    if self.is_edge(x, y) {
-      return true;
-    }
+    if self.is_edge(x, y) { return true; }
+
     let target = self.array[y][x];
     let (mut left, mut right, mut top, mut bottom) = (true, true, true, true);
-    for i in (0..x).rev() {
-      if self.array[y][i] >= target {
-        left = false
-      }
-    }
-    for i in x + 1..self.width {
-      if self.array[y][i] >= target {
-        right = false
-      }
-    }
-    for i in (0..y).rev() {
-      if self.array[i][x] >= target {
-        top = false
-      }
-    }
-    for i in y + 1..self.height {
-      if self.array[i][x] >= target {
-        bottom = false;
-      }
-    }
+
+    for i in (0..x).rev() { if self.array[y][i] >= target { left = false } }
+    for i in x + 1..self.width { if self.array[y][i] >= target { right = false } }
+    for i in (0..y).rev() { if self.array[i][x] >= target { top = false } }
+    for i in y + 1..self.height { if self.array[i][x] >= target { bottom = false; } }
+
     left || right || top || bottom
   }
 
   fn scenic_score(&self, x: usize, y: usize) -> usize {
-    if self.is_edge(x, y) {
-      return 0;
-    }
+    if self.is_edge(x, y) { return 0; }
+
     let target = self.array[y][x];
     let (mut left, mut right, mut top, mut bottom) = (0, 0, 0, 0);
-    for i in (0..x).rev() {
-      left += 1;
-      if self.array[y][i] >= target {
-        break
-      }
-    }
-    for i in x + 1..self.width {
-      right += 1;
-      if self.array[y][i] >= target {
-        break
-      }
-    }
-    for i in (0..y).rev() {
-      top += 1;
-      if self.array[i][x] >= target {
-        break
-      }
-    }
-    for i in y + 1..self.height {
-      bottom += 1;
-      if self.array[i][x] >= target {
-        break
-      }
-    }
+
+    for i in (0..x).rev() { left += 1; if self.array[y][i] >= target { break } }
+    for i in x + 1..self.width { right += 1; if self.array[y][i] >= target { break } }
+    for i in (0..y).rev() { top += 1; if self.array[i][x] >= target { break } }
+    for i in y + 1..self.height { bottom += 1; if self.array[i][x] >= target { break } }
+
     left * right * top * bottom
   }
 
