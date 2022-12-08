@@ -12,7 +12,7 @@ fn calculate_value(b: char) -> usize {
   val as usize
 }
 
-pub fn part1() -> usize {
+pub fn part_one() -> usize {
   let mut total = 0usize;
   for line in INPUT.lines() {
     let line_len = line.len();
@@ -28,7 +28,7 @@ pub fn part1() -> usize {
   total
 }
 
-pub fn part2() -> usize {
+pub fn part_two() -> usize {
   let mut total = 0usize;
   let lines = INPUT.lines().collect::<Vec<_>>();
   let mut chunks = lines.chunks(3);

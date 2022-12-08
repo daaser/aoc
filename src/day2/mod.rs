@@ -99,7 +99,7 @@ impl Choice {
   }
 }
 
-pub fn part1() -> usize {
+pub fn part_one() -> usize {
   let mut total = 0usize;
   for line in INPUT.lines() {
     let (theirs, mine) = Choice::new(line);
@@ -108,7 +108,7 @@ pub fn part1() -> usize {
   total
 }
 
-pub fn part2() -> usize {
+pub fn part_two() -> usize {
   let mut total = 0usize;
   for line in INPUT.lines() {
     let (theirs, mine) = Outcome::new(line);

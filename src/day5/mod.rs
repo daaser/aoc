@@ -41,7 +41,7 @@ fn parse_input() -> (Vec<VecDeque<char>>, Vec<Instruction>) {
   (stacks, instructions)
 }
 
-pub fn part1() -> String {
+pub fn part_one() -> String {
   let (mut stacks, instructions) = parse_input();
   for inst in instructions {
     for _ in 0..inst.num {
@@ -52,7 +52,7 @@ pub fn part1() -> String {
   stacks.into_iter().filter_map(|mut stack| stack.pop_front()).collect()
 }
 
-pub fn part2() -> String {
+pub fn part_two() -> String {
   let (mut stacks, instructions) = parse_input();
   for inst in instructions {
     let range = stacks[inst.from - 1].drain(0..inst.num).collect::<VecDeque<_>>();

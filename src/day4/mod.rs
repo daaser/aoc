@@ -11,7 +11,7 @@ fn parse_line_to_set(line: &str) -> (HashSet<usize>, HashSet<usize>) {
   ((r1_start..=r1_end).collect(), (r2_start..=r2_end).collect())
 }
 
-pub fn part1() -> usize {
+pub fn part_one() -> usize {
   let mut total = 0usize;
   for line in INPUT.lines() {
     let (r1, r2) = parse_line_to_set(line);
@@ -22,7 +22,7 @@ pub fn part1() -> usize {
   total
 }
 
-pub fn part2() -> usize {
+pub fn part_two() -> usize {
   let mut total = 0usize;
   for line in INPUT.lines() {
     let (r1, r2) = parse_line_to_set(line);

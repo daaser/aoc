@@ -14,9 +14,9 @@ fn unique_window(size: usize) -> usize {
   count
 }
 
-pub fn part1() -> usize { unique_window(4) }
+pub fn part_one() -> usize { unique_window(4) }
 
-pub fn part2() -> usize { unique_window(14) }
+pub fn part_two() -> usize { unique_window(14) }
 
 /*
 ┏━━━━ DAY 6  ━━━━┓

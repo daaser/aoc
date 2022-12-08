@@ -97,7 +97,7 @@ impl Grid {
   }
 }
 
-pub fn part1() -> usize {
+pub fn part_one() -> usize {
   let mut total = 0;
   let g = Grid::from_str(INPUT).unwrap();
   for y in 0..g.height {
@@ -110,12 +110,11 @@ pub fn part1() -> usize {
   total
 }
 
-pub fn part2() -> usize {
+pub fn part_two() -> usize {
   let mut score = 0;
   let g = Grid::from_str(INPUT).unwrap();
   for y in 0..g.height {
     for x in 0..g.width {
-      let ss = g.scenic_score(x, y);
       score = score.max(g.scenic_score(x, y));
     }
   }

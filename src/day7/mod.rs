@@ -69,7 +69,7 @@ fn parse_filesystem(arena: &mut Arena<FSNode>) -> NodeId {
   root
 }
 
-pub fn part1() -> usize {
+pub fn part_one() -> usize {
   let arena = &mut Arena::new();
   parse_filesystem(arena);
 
@@ -83,7 +83,7 @@ pub fn part1() -> usize {
   total
 }
 
-pub fn part2() -> usize {
+pub fn part_two() -> usize {
   let arena = &mut Arena::new();
   let root = parse_filesystem(arena);
 

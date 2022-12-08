@@ -17,8 +17,8 @@ macro_rules! day {
     println!(
       "┏━━━━ DAY {:<2} ━━━━┓\n┃{:<16}┃\n┃{:<16}┃\n┃{:16}┃",
       $day,
-      paste! { [<day $day>]::part1() },
-      paste! { [<day $day>]::part2() },
+      paste! { [<day $day>]::part_one() },
+      paste! { [<day $day>]::part_two() },
       ""
     );
     println!("┃{:<16?}┃\n┗━━━━━━━━━━━━━━━━┛\n", now.elapsed());

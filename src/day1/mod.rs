@@ -1,8 +1,8 @@
 const INPUT: &str = include_str!("input.txt");
 
-pub fn part1() -> usize { partition().into_iter().next().unwrap_or_default() }
+pub fn part_one() -> usize { partition().into_iter().next().unwrap_or_default() }
 
-pub fn part2() -> usize { partition().into_iter().take(3).sum() }
+pub fn part_two() -> usize { partition().into_iter().take(3).sum() }
 
 fn partition() -> Vec<usize> {
   let mut count = 0usize;
