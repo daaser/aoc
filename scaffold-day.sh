@@ -5,7 +5,7 @@ if [[ -z ${SESSION} ]]; then
   exit 1
 fi
 
-DAY=$(date -u +"%-d")
+DAY=$(date +"%-d")
 PREVIOUS_DAY=$((DAY-1))
 BASEPATH="./src/day${DAY}"
 
