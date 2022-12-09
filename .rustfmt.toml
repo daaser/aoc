@@ -1,0 +1,7 @@
+# hard_tabs = true
+edition = "2021"
+# fn_params_layout = "Compressed"
+fn_args_layout = "Compressed"
+max_width = 100
+tab_spaces = 2
+use_small_heuristics = "Max"
