@@ -82,8 +82,8 @@ pub fn part_one() -> isize {
   prog.signal_strength()
 }
 
-pub fn part_two() -> String {
+pub fn part_two() -> char {
   let mut prog = Program::from_str(INPUT).unwrap();
   prog.render_screen();
-  "".to_string()
+  '\u{2593}'
 }
