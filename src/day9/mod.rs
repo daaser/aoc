@@ -81,10 +81,7 @@ impl FromStr for Direction {
 }
 
 fn parse_line(line: &str) -> (Direction, usize) {
-  line
-    .split_once(' ')
-    .map(|(d, s)| (Direction::from_str(d).unwrap(), s.parse().unwrap()))
-    .unwrap()
+  line.split_once(' ').map(|(d, s)| (Direction::from_str(d).unwrap(), s.parse().unwrap())).unwrap()
 }
 
 pub fn part_one() -> usize {
