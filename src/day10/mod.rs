@@ -41,26 +41,25 @@ impl FromStr for Program {
 impl Program {
   fn signal_strength(&mut self) -> isize {
     let mut signal_strength: isize = 0;
-
     for op in self.ops.iter() {
       match op {
         Inst::Addx(val) => {
           for i in 0..2 {
+            if CYCLES.contains(&self.cycle) {
+              signal_strength += self.x * self.cycle;
+            }
             self.cycle += 1;
             if i == 1 {
               // after cycle
               self.x += val;
             }
-            if CYCLES.contains(&self.cycle) {
-              signal_strength += self.x * self.cycle;
-            }
           }
         }
         Inst::Noop => {
-          self.cycle += 1;
           if CYCLES.contains(&self.cycle) {
             signal_strength += self.x * self.cycle;
           }
+          self.cycle += 1;
         }
       }
     }
@@ -75,13 +74,11 @@ impl Program {
     let row = cycle / 40isize;
     let col = cycle % 40isize;
 
-    let render = positions.contains(&col);
-    screen[row as usize][col as usize] = render;
+    screen[row as usize][col as usize] = positions.contains(&col);
   }
 
   fn render_screen(&mut self) {
     let mut screen = [[false; 40]; 6];
-
     for op in self.ops.iter() {
       match op {
         Inst::Addx(val) => {
@@ -92,7 +89,6 @@ impl Program {
               // after cycle
               self.x += val;
             }
-            self.update_screen(&mut screen);
           }
         }
         Inst::Noop => {
@@ -102,12 +98,12 @@ impl Program {
       }
     }
 
-    for y in 0..screen.len() {
-      for x in 0..screen[0].len() {
-        print!("{}", if screen[y][x] { '\u{2591}' } else { '\u{2593}' });
-      }
-      println!();
-    }
+    #[rustfmt::skip]
+    screen.iter().for_each(|row| {
+      row.iter().for_each(|pixel| {
+        print!("{}", if *pixel { '\u{2591}' } else { '\u{2593}' })
+      }); println!();
+    });
   }
 }
 
