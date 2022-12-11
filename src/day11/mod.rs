@@ -1,5 +1,4 @@
 use std::collections::VecDeque;
-use std::str::FromStr;
 
 const INPUT: &str = include_str!("input.txt");
 
@@ -30,39 +29,39 @@ struct Monkey {
   items_inspected: u128,
 }
 
-impl FromStr for Monkey {
-  type Err = ();
+fn parse_u128<S: AsRef<str>>(s: S) -> Option<u128> {
+  s.as_ref().trim().parse().ok()
+}
 
-  fn from_str(s: &str) -> Result<Self, Self::Err> {
-    let mut lines = s.lines();
-    lines.next().unwrap();
-    let items = lines
-      .next()
-      .unwrap()
-      .split_once(':')
-      .map(|(_, items)| items.split(", ").map(|i| i.trim().parse::<u128>().unwrap()).collect())
-      .unwrap();
-    let op = lines
-      .next()
-      .unwrap()
-      .split_once(':')
-      .map(|(_, op)| {
-        let mut rsp = op.rsplit(' ');
-        let Ok(num) = rsp.next().unwrap().parse::<u128>() else {
-          return Operation::Square;
-        };
-        match rsp.next().unwrap() {
-          "+" => Operation::Add(num),
-          "*" => Operation::Multiply(num),
-          _ => unreachable!(),
-        }
-      })
-      .unwrap();
-    let test = lines.next().unwrap().rsplit(' ').next().unwrap().parse::<u128>().unwrap();
-    let t = lines.next().unwrap().rsplit(' ').next().unwrap().parse::<usize>().unwrap();
-    let f = lines.next().unwrap().rsplit(' ').next().unwrap().parse::<usize>().unwrap();
-    Ok(Self { items, op, test, t, f, items_inspected: 0 })
-  }
+fn parse_usize<S: AsRef<str>>(s: S) -> Option<usize> {
+  s.as_ref().trim().parse().ok()
+}
+
+#[rustfmt::skip]
+fn parse_monkey(s: &str) -> Option<Monkey> {
+  let mut lines = s.lines();
+  lines.next()?;
+  let items = lines
+    .next()?
+    .split_once(':')
+    .map(|(_, items)| {
+      items.split(", ").filter_map(parse_u128).collect()
+    })?;
+  let op = lines.next()?.split_once(':').map(|(_, op)| {
+    let mut rsp = op.rsplit(' ');
+    let Some(num) = parse_u128(rsp.next().unwrap()) else {
+      return Operation::Square;
+    };
+    match rsp.next().unwrap() {
+      "+" => Operation::Add(num),
+      "*" => Operation::Multiply(num),
+      _ => unreachable!(),
+    }
+  })?;
+  let test = parse_u128(lines.next()?.rsplit(' ').next()?)?;
+  let t = parse_usize(lines.next()?.rsplit(' ').next()?)?;
+  let f = parse_usize(lines.next()?.rsplit(' ').next()?)?;
+  Some(Monkey { items, op, test, t, f, items_inspected: 0 })
 }
 
 fn round(monkeys: &mut Vec<Monkey>, ridiculous: bool) {
@@ -87,8 +86,7 @@ fn round(monkeys: &mut Vec<Monkey>, ridiculous: bool) {
 }
 
 pub fn part_one() -> u128 {
-  let mut monkeys =
-    INPUT.split("\n\n").filter_map(|m| Monkey::from_str(m).ok()).collect::<Vec<_>>();
+  let mut monkeys = INPUT.split("\n\n").filter_map(parse_monkey).collect::<Vec<_>>();
   for _ in 0..20 {
     round(&mut monkeys, false);
   }
@@ -98,8 +96,7 @@ pub fn part_one() -> u128 {
 }
 
 pub fn part_two() -> u128 {
-  let mut monkeys =
-    INPUT.split("\n\n").filter_map(|m| Monkey::from_str(m).ok()).collect::<Vec<_>>();
+  let mut monkeys = INPUT.split("\n\n").filter_map(parse_monkey).collect::<Vec<_>>();
   for _ in 0..10000 {
     round(&mut monkeys, true);
   }
