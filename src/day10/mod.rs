@@ -44,7 +44,7 @@ impl Program {
     for (cycle, op) in self.ops.iter().enumerate() {
       let cycle = cycle as isize + 1;
       if CYCLES.contains(&cycle) {
-        signal_strength += self.x * cycle as isize;
+        signal_strength += self.x * cycle;
       }
       if let Inst::Addx(val) = op {
         self.x += val;
@@ -82,8 +82,21 @@ pub fn part_one() -> isize {
   prog.signal_strength()
 }
 
-pub fn part_two() -> char {
+pub fn part_two() -> String {
   let mut prog = Program::from_str(INPUT).unwrap();
   prog.render_screen();
-  '\u{2593}'
+  "\u{2593}".repeat(16)
 }
+
+/*
+
+░░░░▓░▓▓░▓░░░▓▓░░░░▓░░░▓▓▓▓░░▓▓░░▓▓░▓▓▓▓
+░▓▓▓▓░▓▓░▓░▓▓░▓▓▓▓░▓░▓▓░▓▓▓▓░▓░▓▓░▓░▓▓▓▓
+░░░▓▓░░░░▓░▓▓░▓▓▓░▓▓░▓▓░▓▓▓▓░▓░▓▓▓▓░▓▓▓▓
+░▓▓▓▓░▓▓░▓░░░▓▓▓░▓▓▓░░░▓▓▓▓▓░▓░▓░░▓░▓▓▓▓
+░▓▓▓▓░▓▓░▓░▓▓▓▓░▓▓▓▓░▓▓▓▓░▓▓░▓░▓▓░▓░▓▓▓▓
+░░░░▓░▓▓░▓░▓▓▓▓░░░░▓░▓▓▓▓▓░░▓▓▓░░░▓░░░░▓
+┏━━━━ DAY 10 ━━━━┓
+┃12520           ┃
+┗━━━━━━━━━━━━━━━━┛
+ */
