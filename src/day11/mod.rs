@@ -37,27 +37,24 @@ fn parse_usize<S: AsRef<str>>(s: S) -> Option<usize> {
   s.as_ref().trim().parse().ok()
 }
 
-#[rustfmt::skip]
 fn parse_monkey(s: &str) -> Option<Monkey> {
   let mut lines = s.lines();
   lines.next()?;
   let items = lines
     .next()?
     .split_once(':')
-    .map(|(_, items)| {
-      items.split(", ").filter_map(parse_u128).collect()
-    })?;
-  let op = lines.next()?.split_once(':').map(|(_, op)| {
+    .map(|(_, items)| items.split(", ").filter_map(parse_u128).collect())?;
+  let op = lines.next()?.split_once(':').map(|(_, op)| -> Option<Operation> {
     let mut rsp = op.rsplit(' ');
-    let Some(num) = parse_u128(rsp.next().unwrap()) else {
-      return Operation::Square;
+    let Some(num) = parse_u128(rsp.next()?) else {
+      return Some(Operation::Square);
     };
-    match rsp.next().unwrap() {
-      "+" => Operation::Add(num),
-      "*" => Operation::Multiply(num),
+    match rsp.next()? {
+      "+" => Some(Operation::Add(num)),
+      "*" => Some(Operation::Multiply(num)),
       _ => unreachable!(),
     }
-  })?;
+  })??; // 🤔🤔🤔
   let test = parse_u128(lines.next()?.rsplit(' ').next()?)?;
   let t = parse_usize(lines.next()?.rsplit(' ').next()?)?;
   let f = parse_usize(lines.next()?.rsplit(' ').next()?)?;
