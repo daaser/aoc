@@ -8,21 +8,27 @@ struct Grid {
   nodes: Vec<Node>,
   start: usize,
   end: usize,
-  width: usize,
+  width: isize,
 }
 
 #[derive(Debug, Clone, Eq, PartialEq)]
 struct Node {
   data: u8,
   pos: usize,
-  x: usize,
-  y: usize,
+  x: isize,
+  y: isize,
 }
 
 impl Grid {
+  #[rustfmt::skip]
   fn add_node(&mut self, data: u8, x: usize, y: usize) {
     let pos = self.nodes.len();
-    let node = Node { data, pos, x, y };
+    let data = match data {
+      b'S' => { self.start = pos; b'a' },
+      b'E' => { self.end = pos; b'z' },
+      _ => data,
+    };
+    let node = Node { data, pos, x: x as isize, y: y as isize };
     self.nodes.push(node);
   }
 
@@ -38,13 +44,13 @@ impl Grid {
       }
       let curr = &self.nodes[pos];
       for (dx, dy) in MOVES {
-        let n = (self.nodes[pos].x as isize + dx)
-          + self.width as isize * (self.nodes[pos].y as isize + dy);
+        let n = (curr.x + dx) + self.width * (curr.y + dy);
         if n < 0 || n >= self.nodes.len() as isize {
           continue;
         }
 
         let n = n as usize;
+
         let neighbor = &self.nodes[n];
         if curr.data + 1 >= neighbor.data && !visited[n] {
           visited[n] = true;
@@ -56,39 +62,26 @@ impl Grid {
   }
 }
 
-fn parse_grid() -> Option<Grid> {
+fn parse_grid() -> Grid {
   let mut grid = Grid { nodes: vec![], start: 0, end: 0, width: 0 };
-  let mut width = 0usize;
-  let mut height = 0usize;
+  let mut x = 0;
   for line in INPUT.lines() {
-    for (idx, c) in line.bytes().enumerate() {
-      let data = match c {
-        b'S' => {
-          grid.start = idx + width;
-          b'a'
-        }
-        b'E' => {
-          grid.end = idx + width;
-          b'z'
-        }
-        _ => c,
-      };
-      grid.add_node(data, idx, height);
+    for (idx, ch) in line.bytes().enumerate() {
+      grid.add_node(ch, idx, x);
     }
-    grid.width = line.len();
-    width += line.len();
-    height += 1;
+    grid.width = line.len() as isize;
+    x += 1;
   }
-  Some(grid)
+  grid
 }
 
 pub fn part_one() -> usize {
-  let grid = parse_grid().unwrap();
+  let grid = parse_grid();
   grid.bfs(grid.start).unwrap()
 }
 
 pub fn part_two() -> usize {
-  let grid = parse_grid().unwrap();
+  let grid = parse_grid();
   let mut shortest = usize::MAX;
   for g in grid.nodes.iter() {
     if g.data == b'a' {
