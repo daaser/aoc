@@ -3,7 +3,7 @@ use std::collections::VecDeque;
 const INPUT: &str = include_str!("input.txt");
 const MOVES: &[(isize, isize)] = &[(0, 1), (0, -1), (-1, 0), (1, 0)];
 
-#[derive(Debug, Clone, Eq, PartialEq)]
+#[derive(Debug)]
 struct Grid {
   nodes: Vec<Node>,
   start: usize,
@@ -11,7 +11,7 @@ struct Grid {
   width: isize,
 }
 
-#[derive(Debug, Clone, Eq, PartialEq)]
+#[derive(Debug)]
 struct Node {
   data: u8,
   pos: usize,
@@ -20,9 +20,9 @@ struct Node {
 }
 
 impl Grid {
-  #[rustfmt::skip]
   fn add_node(&mut self, data: u8, x: usize, y: usize) {
     let pos = self.nodes.len();
+    #[rustfmt::skip]
     let data = match data {
       b'S' => { self.start = pos; b'a' },
       b'E' => { self.end = pos; b'z' },
