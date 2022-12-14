@@ -88,7 +88,7 @@ pub fn part_one() -> u128 {
     round(&mut monkeys, false);
   }
   let mut inspections = monkeys.iter().map(|m| m.items_inspected).collect::<Vec<_>>();
-  inspections.sort_by(|a, b| b.cmp(&a));
+  inspections.sort_by(|a, b| b.cmp(a));
   inspections[0] * inspections[1]
 }
 
@@ -98,7 +98,7 @@ pub fn part_two() -> u128 {
     round(&mut monkeys, true);
   }
   let mut inspections = monkeys.iter().map(|m| m.items_inspected).collect::<Vec<_>>();
-  inspections.sort_by(|a, b| b.cmp(&a));
+  inspections.sort_by(|a, b| b.cmp(a));
   inspections[0] * inspections[1]
 }
 

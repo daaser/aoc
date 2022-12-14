@@ -64,13 +64,11 @@ impl Grid {
 
 fn parse_grid() -> Grid {
   let mut grid = Grid { nodes: vec![], start: 0, end: 0, width: 0 };
-  let mut x = 0;
-  for line in INPUT.lines() {
+  for (x, line) in INPUT.lines().enumerate() {
     for (idx, ch) in line.bytes().enumerate() {
       grid.add_node(ch, idx, x);
     }
     grid.width = line.len() as isize;
-    x += 1;
   }
   grid
 }

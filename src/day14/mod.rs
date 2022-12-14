@@ -18,7 +18,7 @@ impl Display for Tile {
   fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
     write!(f, "{}", match self {
       Rock => "🪨",
-      Air => "..",
+      Air => "  ",
       Sand => "🥪",
     })
   }
@@ -29,6 +29,18 @@ struct Cave {
   tiles: Vec<Vec<Tile>>,
   height: usize,
   correction_factor: usize,
+}
+
+impl Display for Cave {
+  fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+    for y in self.tiles.iter() {
+      for x in y {
+        write!(f, "{x}")?;
+      }
+      writeln!(f)?;
+    }
+    Ok(())
+  }
 }
 
 impl Cave {
@@ -87,7 +99,7 @@ fn parse_cave() -> Cave {
     let mut coords = Vec::new();
     for coord in line.split(" -> ") {
       let (x, y) = coord
-        .split_once(",")
+        .split_once(',')
         .map(parse_coords)
         .unwrap();
       coords.push((x, y));
@@ -124,13 +136,6 @@ pub fn part_one() -> usize {
   let mut cave = parse_cave();
   let mut total = 0;
   while cave.drop_sand() { total += 1 }
-  // for y in cave.tiles {
-  //   for x in y {
-  //     print!("{x}");
-  //   }
-  //   println!();
-  // }
-  // println!();
   total
 }
 
@@ -139,13 +144,6 @@ pub fn part_two() -> usize {
   cave.add_floor();
   let mut total = 0;
   while cave.drop_sand() { total += 1 }
-  // for y in cave.tiles {
-  //   for x in y {
-  //     print!("{x}");
-  //   }
-  //   println!();
-  // }
-  // println!();
   total + 1
 }
 
