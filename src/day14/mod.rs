@@ -66,6 +66,7 @@ impl Cave {
 
   fn add_floor(&mut self) {
     let floor = self.height - 1;
+
     for tile in self.tiles[floor].iter_mut() {
       *tile = Rock;
     }
@@ -81,9 +82,6 @@ fn parse_coords(input: (&str, &str)) -> Coord {
 }
 
 fn parse_cave() -> Cave {
-  let _input = r"498,4 -> 498,6 -> 496,6
-503,4 -> 502,4 -> 502,9 -> 494,9";
-
   let mut points = HashSet::new();
   for line in INPUT.lines() {
     let mut coords = Vec::new();
@@ -105,8 +103,8 @@ fn parse_cave() -> Cave {
     }
   }
 
-  let min_x = points.iter().map(|(x, _)| x).min().unwrap() - 2;
-  let max_x = points.iter().map(|(x, _)| x).max().unwrap() + 2;
+  let min_x = points.iter().map(|(x, _)| x).min().unwrap() - 160;
+  let max_x = points.iter().map(|(x, _)| x).max().unwrap() + 160;
   let height = points.iter().map(|(_, y)| y).max().unwrap() + 3;
   let width = max_x - min_x + 2;
   let mut cave = Cave {
@@ -115,7 +113,6 @@ fn parse_cave() -> Cave {
     tiles: vec![vec![Air; width]; height],
   };
 
-  // println!("{:?}", points);
   for (x, y) in points.iter() {
     cave.tiles[*y][*x - min_x] = Rock;
   }
@@ -127,13 +124,13 @@ pub fn part_one() -> usize {
   let mut cave = parse_cave();
   let mut total = 0;
   while cave.drop_sand() { total += 1 }
-  for y in cave.tiles {
-    for x in y {
-      print!("{x}");
-    }
-    println!();
-  }
-  println!();
+  // for y in cave.tiles {
+  //   for x in y {
+  //     print!("{x}");
+  //   }
+  //   println!();
+  // }
+  // println!();
   total
 }
 
@@ -142,12 +139,19 @@ pub fn part_two() -> usize {
   cave.add_floor();
   let mut total = 0;
   while cave.drop_sand() { total += 1 }
-  for y in cave.tiles {
-    for x in y {
-      print!("{x}");
-    }
-    println!();
-  }
-  println!();
+  // for y in cave.tiles {
+  //   for x in y {
+  //     print!("{x}");
+  //   }
+  //   println!();
+  // }
+  // println!();
   total + 1
 }
+
+/*
+┏━━━━ DAY 14 ━━━━┓
+┃638             ┃
+┃31722           ┃
+┗━━━━━━━━━━━━━━━━┛
+ */
