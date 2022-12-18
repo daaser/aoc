@@ -16,11 +16,15 @@ enum Tile {
 
 impl Display for Tile {
   fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-    write!(f, "{}", match self {
-      Rock => "🪨",
-      Air => "  ",
-      Sand => "🥪",
-    })
+    write!(
+      f,
+      "{}",
+      match self {
+        Rock => "🪨",
+        Air => "  ",
+        Sand => "🥪",
+      }
+    )
   }
 }
 
@@ -98,10 +102,7 @@ fn parse_cave() -> Cave {
   for line in INPUT.lines() {
     let mut coords = Vec::new();
     for coord in line.split(" -> ") {
-      let (x, y) = coord
-        .split_once(',')
-        .map(parse_coords)
-        .unwrap();
+      let (x, y) = coord.split_once(',').map(parse_coords).unwrap();
       coords.push((x, y));
     }
     for pair in coords.iter().zip(coords.get(1..).unwrap()) {
@@ -119,11 +120,7 @@ fn parse_cave() -> Cave {
   let max_x = points.iter().map(|(x, _)| x).max().unwrap() + 160;
   let height = points.iter().map(|(_, y)| y).max().unwrap() + 3;
   let width = max_x - min_x + 2;
-  let mut cave = Cave {
-    height,
-    correction_factor: min_x,
-    tiles: vec![vec![Air; width]; height],
-  };
+  let mut cave = Cave { height, correction_factor: min_x, tiles: vec![vec![Air; width]; height] };
 
   for (x, y) in points.iter() {
     cave.tiles[*y][*x - min_x] = Rock;
@@ -135,7 +132,9 @@ fn parse_cave() -> Cave {
 pub fn part_one() -> usize {
   let mut cave = parse_cave();
   let mut total = 0;
-  while cave.drop_sand() { total += 1 }
+  while cave.drop_sand() {
+    total += 1
+  }
   total
 }
 
@@ -143,7 +142,9 @@ pub fn part_two() -> usize {
   let mut cave = parse_cave();
   cave.add_floor();
   let mut total = 0;
-  while cave.drop_sand() { total += 1 }
+  while cave.drop_sand() {
+    total += 1
+  }
   total + 1
 }
 

@@ -1,5 +1,5 @@
-use std::cmp::Ordering;
 use serde::Deserialize;
+use std::cmp::Ordering;
 
 use crate::day13::Cons::{Car, Cdr};
 
